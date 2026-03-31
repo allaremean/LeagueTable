@@ -1,6 +1,6 @@
 # LaLiga Table
 
-A gorgeous, full-stack application simulating a digital football league system. This project features an **ASP.NET Core Web API** back-end powered by Entity Framework,  integrated with a  **Angular** front-end dashboard.
+A full-stack application simulating a football league system. This project features an **ASP.NET Core Web API** back-end powered by Entity Framework,  integrated with a  **Angular** front-end dashboard.
 
 ## 🚀 Features
 
