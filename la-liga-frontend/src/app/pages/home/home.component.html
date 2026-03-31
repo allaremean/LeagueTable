@@ -1,0 +1,43 @@
+<div class="glass-panel standings-panel">
+  <div class="header">
+    <h2 class="text-gradient">LaLiga Standings</h2>
+    <p>Live, dynamically calculated football league table.</p>
+  </div>
+
+  <div class="glass-table-container">
+    <table class="glass-table">
+      <thead>
+        <tr>
+          <th class="numeric">Pos</th>
+          <th>Club</th>
+          <th class="numeric">MP</th>
+          <th class="numeric">W</th>
+          <th class="numeric">D</th>
+          <th class="numeric">L</th>
+          <th class="numeric">GF</th>
+          <th class="numeric">GA</th>
+          <th class="numeric">GD</th>
+          <th class="numeric">Pts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of standings$ | async">
+          <td class="numeric bold">{{ s.position }}</td>
+          <td class="bold">{{ s.team }}</td>
+          <td class="numeric">{{ s.played }}</td>
+          <td class="numeric">{{ s.wins }}</td>
+          <td class="numeric">{{ s.draws }}</td>
+          <td class="numeric">{{ s.losses }}</td>
+          <td class="numeric">{{ s.goalsFor }}</td>
+          <td class="numeric">{{ s.goalsAgainst }}</td>
+          <td class="numeric">{{ s.goalDifference > 0 ? '+' + s.goalDifference : s.goalDifference }}</td>
+          <td class="numeric bold text-gradient">{{ s.points }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div *ngIf="(standings$ | async)?.length === 0" class="empty-state">
+      <p>No standings available yet. Matches need to be played.</p>
+    </div>
+  </div>
+</div>

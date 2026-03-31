@@ -1,0 +1,30 @@
+<div class="glass-panel text-panel">
+  <div class="header">
+    <h2 class="text-gradient">Match Results</h2>
+    <p>All recorded games across LaLiga</p>
+  </div>
+
+  <div class="matches-grid">
+    <div *ngFor="let m of matches" class="match-card glass-panel">
+      
+      <div class="team-side home">
+        <h4>{{ getTeamName(m.homeTeamID) }}</h4>
+        <span class="acronym">{{ m.homeTeamID }}</span>
+      </div>
+
+      <div class="scoreline text-gradient">
+        {{ m.homeScore }} - {{ m.awayScore }}
+      </div>
+
+      <div class="team-side away">
+        <h4>{{ getTeamName(m.awayTeamID) }}</h4>
+        <span class="acronym">{{ m.awayTeamID }}</span>
+      </div>
+
+    </div>
+  </div>
+  
+  <div *ngIf="matches.length === 0" class="empty-state">
+    <p>No matches have been recorded yet.</p>
+  </div>
+</div>

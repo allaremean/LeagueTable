@@ -1,0 +1,25 @@
+<nav class="navbar glass-panel">
+  <div class="nav-brand">
+    <a routerLink="/" class="brand-logo text-gradient">LaLiga Live</a>
+  </div>
+  
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Standings</a>
+    <a routerLink="/teams" routerLinkActive="active">Teams</a>
+    <a routerLink="/matches" routerLinkActive="active">Matches</a>
+    
+    <ng-container *ngIf="currentUser$ | async as user; else loggedOut">
+      <a *ngIf="isAdmin(user)" routerLink="/admin" routerLinkActive="active" class="link-admin">Admin Dashboard</a>
+      
+      <div class="nav-user">
+        <span class="greeting">Hi, <span class="text-gradient">{{user.username}}</span></span>
+        <button class="btn-secondary btn-sm" (click)="logout()">Logout</button>
+      </div>
+    </ng-container>
+
+    <ng-template #loggedOut>
+      <a routerLink="/login" class="btn-secondary btn-sm">Login</a>
+      <a routerLink="/register" class="btn-primary btn-sm">Register</a>
+    </ng-template>
+  </div>
+</nav>

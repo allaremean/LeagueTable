@@ -1,0 +1,31 @@
+<div class="auth-container">
+  <div class="glass-panel auth-card">
+    <h2 class="text-gradient">Create Account</h2>
+    <p class="subtitle">Join LaLiga Live to manage teams and matches</p>
+
+    <div *ngIf="error" class="alert">{{ error }}</div>
+
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" class="form-input" 
+               [(ngModel)]="username" required autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-input" 
+               [(ngModel)]="password" required autocomplete="new-password">
+      </div>
+
+      <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;" 
+              [disabled]="!registerForm.form.valid || isLoading">
+        {{ isLoading ? 'Creating Account...' : 'Register' }}
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <p>Already have an account? <a routerLink="/login">Login here</a></p>
+    </div>
+  </div>
+</div>

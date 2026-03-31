@@ -1,0 +1,31 @@
+<div class="auth-container">
+  <div class="glass-panel auth-card">
+    <h2 class="text-gradient">Welcome Back</h2>
+    <p class="subtitle">Enter your credentials to access your account</p>
+
+    <div *ngIf="error" class="alert">{{ error }}</div>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" class="form-input" 
+               [(ngModel)]="username" required autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-input" 
+               [(ngModel)]="password" required autocomplete="current-password">
+      </div>
+
+      <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;" 
+              [disabled]="!loginForm.form.valid || isLoading">
+        {{ isLoading ? 'Logging in...' : 'Login' }}
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <p>Don't have an account? <a routerLink="/register">Register here</a></p>
+    </div>
+  </div>
+</div>

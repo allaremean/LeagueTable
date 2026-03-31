@@ -1,0 +1,72 @@
+.navbar {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 4rem);
+  max-width: 1200px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 100px;
+  
+  /* Reset hover transform for navbar */
+  &:hover {
+    transform: translateX(-50%);
+  }
+}
+
+.brand-logo {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: -0.05em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+
+    &:not(.btn-primary):not(.btn-secondary) {
+      &:hover, &.active {
+        color: var(--accent-primary);
+      }
+    }
+  }
+
+  .link-admin {
+    color: var(--accent-secondary);
+    &:hover, &.active {
+      text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+    }
+  }
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--border-glass);
+
+  .greeting {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}

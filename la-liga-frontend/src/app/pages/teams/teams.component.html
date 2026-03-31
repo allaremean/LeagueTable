@@ -1,0 +1,21 @@
+<div class="glass-panel text-panel">
+  <div class="header">
+    <h2 class="text-gradient">Teams Directory</h2>
+    <p>All participating clubs in LaLiga</p>
+  </div>
+
+  <div class="teams-grid">
+    <div *ngFor="let team of teams$ | async" class="team-card glass-panel">
+      <h3 class="team-id">{{ team.teamID }}</h3>
+      <h4>{{ team.name }}</h4>
+      <div class="team-details">
+        <p><i class="icon">📍</i> {{ team.city || 'Unknown City' }}</p>
+        <p><i class="icon">🏟️</i> {{ team.stadium || 'Unknown Stadium' }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="(teams$ | async)?.length === 0" class="empty-state">
+    <p>No teams available. Admins can add teams from the dashboard.</p>
+  </div>
+</div>
