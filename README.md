@@ -1,21 +1,20 @@
-# LaLiga Manager Pro
+# LaLiga Table
 
-A gorgeous, full-stack application simulating a digital football league system. This project features an **ASP.NET Core Web API** back-end powered by Entity Framework, seamlessly integrated with a highly-modern, glassmorphism-styled **Angular 17+** front-end dashboard.
+A gorgeous, full-stack application simulating a digital football league system. This project features an **ASP.NET Core Web API** back-end powered by Entity Framework,  integrated with a  **Angular** front-end dashboard.
 
 ## 🚀 Features
 
 ### Frontend (Angular 17+)
-- **Premium Glassmorphism UI**: High-end styling built entirely from scratch using pure SCSS variables, without relying on external CSS frameworks like Tailwind.
 - **Dynamic Standings Table**: Real-time league table calculating wins, losses, goals, and points dynamically.
 - **Matches Directory**: Publicly view all historical games featuring full team names, acronyms, and scorelines.
 - **Admin Command Dashboard**: Secure workspace exclusively for `Admin` and `SuperAdmin` users to visually manage teams, update matches, and administer user identities.
 - **JWT Interceptor**: Automated state management securely attaching JWT authorization headers to protected network requests.
 
 ### Backend (ASP.NET Core 8)
-- **Code-First Entity Framework Architecture**: Relational SQL Server database mapping utilizing strict foreign keys and navigational entities.
-- **Robust Role-Based Authentication**: Custom JWT-based Identity matrix handling logic for registering, promoting, and demoting users globally.
+- **Code-First Entity Framework Architecture**: Relational SQL Server database mapping utilizing foreign keys and navigational entities.
+- **Role-Based Authentication**: Custom JWT-based Identity matrix handling logic for registering, promoting, and demoting users globally.
 - **Scalar API Interface**: Modern, interactive REST API testing environment mounted at `/scalar/v1`.
-- **Dynamic Math Generators**: The league points and goal-difference analytics are completely calculated on-the-fly via the Match logic matrix rather than rigidly stored, ensuring maximum data integrity!
+- **Dynamic Math Generators**: The league points and goal-difference analytics are completely calculated on-the-fly via the Match logic matrix.
 
 ## ⚽ Unique Design Decisions
 - **Acronyms as Primary Keys**: Instead of using non-descriptive numerics (like `Id=1`), Teams utilize their natural acronym as the SQL Primary Key (e.g. `RMA`). Match Primary keys are structurally concatenated hashes (e.g. `RMABAR` represents Real Madrid vs Barcelona) providing immediate referential context!
@@ -37,7 +36,7 @@ A gorgeous, full-stack application simulating a digital football league system. 
 4. Open your browser to `http://localhost:4200` to dive into the UI!
 
 ## 🔐 Accounts & Permissions
-Users must register an account and be promoted by a SuperAdmin via the API to gain full CRUD operational access to the `/admin` UI dashboard. SuperAdmins possess global deletion and role-manipulation rights!
+Users must register an account and be promoted by a SuperAdmin via the API to gain  CRUD operational access to the `/admin` UI dashboard. SuperAdmins possess global deletion and role-manipulation rights!. There is only one SuperAdmin.
 
 ---
-*Developed to showcase depth mapping Full-Stack .NET and Angular structural excellence.*
+*Developed to showcase .NET knowledge depth and Angular.*
