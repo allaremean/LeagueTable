@@ -1,37 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using LaLiga.Data;
 using LaLiga.Models;
+using LaLiga.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace LaLiga.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MatchesController(LaligaDbContext context) : ControllerBase
+    public class MatchesController(IMatchService matchService) : ControllerBase
     {
-        private readonly LaligaDbContext _context = context;
+        private readonly IMatchService _matchService = matchService;
+
         [Authorize(Roles ="SuperAdmin,Admin,User")]
         [HttpGet]
         public async Task<ActionResult> GetMatches()
         {
-            var matches = await _context.Matches
-                .Include(m => m.HomeTeam)
-                .Include(m => m.AwayTeam)
-                .Select(m => new
-                {
-                    m.MatchID,
-                    HomeTeam = m.HomeTeam.Name,
-                    m.HomeTeamID,
-                    AwayTeam = m.AwayTeam.Name,
-                    m.AwayTeamID,
-                    m.HomeScore,
-                    m.AwayScore
-                })
-                .ToListAsync();
-
+            var matches = await _matchService.GetMatchesAsync();
             return Ok(matches);
         }
 
@@ -39,21 +24,7 @@ namespace LaLiga.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetMatchById (string id)
         {
-            var match = await _context.Matches
-                .Include(m => m.HomeTeam)
-                .Include(m => m.AwayTeam)
-                .Where(m=> m.MatchID == id)
-                .Select(m => new
-                {
-                    m.MatchID,
-                    HomeTeam = m.HomeTeam!.Name,
-                    m.HomeTeamID,
-                    AwayTeam = m.AwayTeam!.Name,
-                    m.AwayTeamID,
-                    m.HomeScore,
-                    m.AwayScore
-                })
-                .FirstOrDefaultAsync();
+            var match = await _matchService.GetMatchByIdAsync(id);
             if(match is null)
             {
                 return NotFound();
@@ -65,54 +36,31 @@ namespace LaLiga.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateMatch(Match newMatch)
         {
-            if (newMatch.HomeTeamID == newMatch.AwayTeamID)
-                return BadRequest("A team cannot play itself.");
+            var result = await _matchService.CreateMatchAsync(newMatch);
 
-            var homeExists = await _context.Teams.AnyAsync(t => t.TeamID == newMatch.HomeTeamID);
-            var awayExists = await _context.Teams.AnyAsync(t => t.TeamID == newMatch.AwayTeamID);
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
 
-            if (!homeExists || !awayExists)
-                return BadRequest("One or both teams do not exist.");
-
-            if (newMatch.HomeScore < 0 || newMatch.AwayScore < 0)
-                return BadRequest("Scores cannot be negative.");
-
-            _context.Matches.Add(newMatch);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetMatches), new { id = newMatch.MatchID }, newMatch);
+            return CreatedAtAction(nameof(GetMatches), new { id = result.CreatedMatch!.MatchID }, result.CreatedMatch);
         }
 
         [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateMatch(string id, Match updatedMatch)
         {
-            var match = await _context.Matches.FindAsync(id);
+            var result = await _matchService.UpdateMatchAsync(id, updatedMatch);
 
-            if (match == null)
+            if (!result.Success && result.Message == "Not found")
+            {
                 return NotFound();
+            }
 
-            if (updatedMatch.HomeTeamID == updatedMatch.AwayTeamID)
-                return BadRequest("A team cannot play itself.");
-
-            var homeExists = await _context.Teams
-                .AnyAsync(t => t.TeamID == updatedMatch.HomeTeamID);
-
-            var awayExists = await _context.Teams
-                .AnyAsync(t => t.TeamID == updatedMatch.AwayTeamID);
-
-            if (!homeExists || !awayExists)
-                return BadRequest("One or both teams do not exist.");
-
-            if (updatedMatch.HomeScore < 0 || updatedMatch.AwayScore < 0)
-                return BadRequest("Scores cannot be negative.");
-
-            match.HomeTeamID = updatedMatch.HomeTeamID;
-            match.AwayTeamID = updatedMatch.AwayTeamID;
-            match.HomeScore = updatedMatch.HomeScore;
-            match.AwayScore = updatedMatch.AwayScore;
-
-            await _context.SaveChangesAsync();
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
 
             return NoContent();
         }
@@ -121,14 +69,11 @@ namespace LaLiga.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMatch(string id)
         {
-            var match = await _context.Matches.FindAsync(id);
-            if (match is null)
+            var success = await _matchService.DeleteMatchAsync(id);
+            if (!success)
             {
                 return NotFound();
             }
-            _context.Matches.Remove(match);
-            await _context.SaveChangesAsync();
-
 
             return NoContent();
         }
