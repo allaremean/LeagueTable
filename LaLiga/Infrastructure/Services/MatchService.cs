@@ -1,11 +1,12 @@
-using LaLiga.Data;
-using LaLiga.Models;
+using LaLiga.Infrastructure.Data;
+using LaLiga.Core.Models;
+using LaLiga.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LaLiga.Services
+namespace LaLiga.Infrastructure.Services
 {
     public class MatchService(LaligaDbContext context) : IMatchService
     {

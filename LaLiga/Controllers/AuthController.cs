@@ -1,5 +1,5 @@
-﻿using LaLiga.Models;
-using LaLiga.Services;
+using LaLiga.Core.Models;
+using LaLiga.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

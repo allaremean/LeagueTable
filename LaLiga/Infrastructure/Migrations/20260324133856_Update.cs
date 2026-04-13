@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace LaLiga.Migrations
+namespace LaLiga.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class Update : Migration

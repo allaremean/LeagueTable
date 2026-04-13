@@ -1,4 +1,4 @@
-﻿namespace LaLiga.Models
+namespace LaLiga.Core.Models
 {
     public class User
     {

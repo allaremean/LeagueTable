@@ -1,6 +1,6 @@
-﻿using LaLiga.Models;
+using LaLiga.Core.Models;
 using Microsoft.EntityFrameworkCore;
-namespace LaLiga.Data
+namespace LaLiga.Infrastructure.Data
 {
     public class LaligaDbContext(DbContextOptions<LaligaDbContext> options) : DbContext(options)
     {

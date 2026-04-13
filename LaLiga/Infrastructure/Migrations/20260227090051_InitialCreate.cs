@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace LaLiga.Migrations
+namespace LaLiga.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

@@ -1,6 +1,6 @@
-﻿using LaLiga.Models;
+using LaLiga.Core.Models;
 
-namespace LaLiga.Services
+namespace LaLiga.Core.Interfaces
 {
     public interface IAuthService
     {

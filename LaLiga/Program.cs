@@ -1,7 +1,8 @@
 using Scalar.AspNetCore;
-using LaLiga.Data;
+using LaLiga.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using LaLiga.Services;
+using LaLiga.Core.Interfaces;
+using LaLiga.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;

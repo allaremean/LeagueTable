@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using LaLiga.Services;
+using LaLiga.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 
 namespace LaLiga.Controllers

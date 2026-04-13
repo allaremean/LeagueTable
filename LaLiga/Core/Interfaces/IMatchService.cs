@@ -1,8 +1,8 @@
-using LaLiga.Models;
+using LaLiga.Core.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LaLiga.Services
+namespace LaLiga.Core.Interfaces
 {
     public interface IMatchService
     {
